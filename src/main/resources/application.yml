@@ -1,0 +1,33 @@
+spring:
+
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;database=test
+    username: dfq
+    password: 123
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1
+    testWhileIdle: true
+    testOnBorrow: true
+    testOnReturn: true
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    initialization-mode: always
+    #    存放建表语句
+    schema: classpath:schema.sql
+#    存放数据的添加语句
+#    data: classpath:data.sql
+#    设置分隔符
+#    separator: \\
+##spring集成Mybatis环境 #pojo别名扫描包
+#  mybatis.type-aliases-package=com.putao.domain
+#  #加载Mybatis映射文件
+#  mybatis.mapper-locations=classpath:mapper/**/*.xml
+mybatis:
+  type-aliases-package: com.dfq.putao.domain
+  mapper-locations: classpath:mapper/*.xml

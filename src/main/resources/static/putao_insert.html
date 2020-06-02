@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+
+		<script type="text/javascript" src="easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	</head>
+	<script type="text/javascript">
+
+	</script>
+	<body>
+	<div style="margin-top: 200px; " align="center">
+	<div class="easyui-panel" title="注册" style="width:100%;max-width:400px;padding:30px 60px;">
+		<form id="ff" class="easyui-form"  data-options="novalidate:true">
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="pid" style="width:100%" id="pid" data-options="label:'葡萄种类:',required:true">
+			</div>
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="name" style="width:100%" id="name"  data-options="label:'葡萄名字:',required:true ">
+			</div>
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="project" style="width:100%" id="project" data-options="label:'葡萄种植要求:',required:true ">
+			</div>
+
+		
+		</form>
+		<div style="text-align:center;padding:5px 0">
+			<button id="resign" class="easyui-linkbutton" style="width:80px" onclick="resign()">注册</button>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">重置</a>
+		</div>
+	</div>
+	<script>
+
+
+		function resign() {
+			var pid=$('#pid').val();
+			var name=$('#name').val();
+			var project=$('#project').val();
+
+			var data={"pid":pid,"name":name,"project":project};
+			var datas = JSON.stringify(data);
+			if(pid.length<=0) {
+				alert("葡萄种类不能为空！！");
+				return;
+			}
+
+			$.ajax({
+				url:"putao/resign",
+				data:datas,
+				type:"post",
+				dataType: "json",
+				contentType: "application/json;charset=UTF-8",
+				success:function (data) {
+					if(data.msg){
+						alert("注册成功");
+					}
+					else{
+						alert("注册失败，请重试！");
+					}
+				}
+			});
+		}
+
+		function clearForm(){
+			$('#ff').form('clear');
+		}
+	</script>
+	</div>
+	</body>
+</html>

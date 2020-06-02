@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfq.putao.dao.PutaoDao">
+
+    <resultMap type="com.dfq.putao.domain.Putao" id="PutaoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="pid" column="pid" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="project" column="project" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--分页查询-->
+    <select id="findByPage" resultMap="PutaoMap">
+        SELECT * FROM putao
+    </select>
+    <!--新增-->
+    <insert id="insert" parameterType="com.dfq.putao.domain.Putao">
+       INSERT INTO putao(pid,name,project) VALUES(#{pid},#{name},#{project})
+    </insert>
+    <!--通过phone查询单个-->
+    <select id="findByPhone" resultMap="PutaoMap" >
+      select * from putao where pid = #{pid}
+    </select>
+    <!--修改-->
+    <update id="update">
+        UPDATE putao SET pid=#{pid},name=#{name},project=#{project}
+        WHERE id=#{id}
+    </update>
+
+    <!--通过ID删除单个-->
+    <delete id="deleteById">
+        DELETE FROM putao
+        WHERE id=#{id}
+    </delete>
+
+</mapper>
